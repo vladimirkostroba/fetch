@@ -1,20 +1,24 @@
 import {fetchBreeds,fetchCatByBreed} from './js/cat-api'
 import {breedsHandler,catInfoHandler} from './js/tamplates'
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const refs = {
     select:document.querySelector('.breed-select'),
     catInfo:document.querySelector('.cat-info'),
+    loader:document.querySelector('.loader'),
 }
 
-console.log(refs.catInfo);
+const errorMesaage = 'Oops! Something went wrong! Try reloading the page!'
 
 
 // 
 
 fetchBreeds()
-.then(breeds => (
-    refs.select.insertAdjacentHTML('afterbegin',breedsHandler(breeds))
-    ))
+.then(breeds => {
+    refs.select.insertAdjacentHTML('beforeend',breedsHandler(breeds))
+})
+.catch(Notify.failure(errorMesaage))
+
 
 // 
 
@@ -22,8 +26,11 @@ refs.select.addEventListener('change', function (e) {
     refs.catInfo.innerHTML = '';
 
     const searchQuery = e.target.value
-    fetchCatByBreed(searchQuery).then(cat => 
-        refs.catInfo.insertAdjacentHTML('afterbegin',catInfoHandler(cat)))
+    fetchCatByBreed(searchQuery)
+    .then(cat => { 
+        refs.loader.classList.add('visible');
+        refs.catInfo.insertAdjacentHTML('beforeend',catInfoHandler(cat))
+    })
+    .catch(Notify.failure(errorMesaage))
+    .finally(refs.loader.classList.remove('visible'))
 });
-
-// fetchCatByBreed('acur').then(res => console.log(res))
