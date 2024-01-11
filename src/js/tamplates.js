@@ -5,3 +5,14 @@ export function breedsHandler(arr){
 
     return markup
 }
+
+export function catInfoHandler({url,breeds}){
+    return `<div class="overlay">
+    <img src="${url}" alt="img" width="400">
+  </div>
+  <div class="info">
+    <h2 class="title">${breeds[0].name}</h2>
+    <p class="description">${breeds[0].description}</p>
+    <p class="temperament">Temperament: ${breeds[0].temperament}</p>
+  </div>`
+}

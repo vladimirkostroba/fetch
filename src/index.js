@@ -1,5 +1,5 @@
 import {fetchBreeds,fetchCatByBreed} from './js/cat-api'
-import {breedsHandler} from './js/tamplates'
+import {breedsHandler,catInfoHandler} from './js/tamplates'
 
 const refs = {
     select:document.querySelector('.breed-select'),
@@ -8,12 +8,22 @@ const refs = {
 
 console.log(refs.catInfo);
 
+
 // 
 
 fetchBreeds()
-.then(breeds => breedsHandler(breeds))
-.then(markup => refs.select.insertAdjacentHTML('afterbegin',markup))
+.then(breeds => (
+    refs.select.insertAdjacentHTML('afterbegin',breedsHandler(breeds))
+    ))
 
 // 
 
-fetchCatByBreed('acur').then(res => console.log(res))
+refs.select.addEventListener('change', function (e) {
+    refs.catInfo.innerHTML = '';
+
+    const searchQuery = e.target.value
+    fetchCatByBreed(searchQuery).then(cat => 
+        refs.catInfo.insertAdjacentHTML('afterbegin',catInfoHandler(cat)))
+});
+
+// fetchCatByBreed('acur').then(res => console.log(res))
