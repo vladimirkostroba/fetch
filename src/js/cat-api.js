@@ -18,6 +18,8 @@ const headers = new Headers({
     return fetch(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`,requestOptions)
     .then(response => response.json())
     .then(res => res[0])
+    .catch(error => Notify.failure(errorMesaage))
+    // .finally(() => refs.loader.classList.remove('visible'))
   }
 
   

@@ -17,7 +17,7 @@ fetchBreeds()
 .then(breeds => {
     refs.select.insertAdjacentHTML('beforeend',breedsHandler(breeds))
 })
-.catch(Notify.failure(errorMesaage))
+// .catch(error => Notify.failure(errorMesaage))
 
 
 // 
@@ -31,6 +31,7 @@ refs.select.addEventListener('change', function (e) {
         refs.loader.classList.add('visible');
         refs.catInfo.insertAdjacentHTML('beforeend',catInfoHandler(cat))
     })
-    .catch(Notify.failure(errorMesaage))
-    .finally(refs.loader.classList.remove('visible'))
+    // .catch(error => Notify.failure(errorMesaage))
+    // .finally(() => refs.loader.classList.remove('visible'))
 });
+
