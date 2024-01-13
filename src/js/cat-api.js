@@ -1,6 +1,3 @@
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
-
 const headers = new Headers({
     "Content-Type": "application/json",
     "x-api-key": "live_omBlQNpPScjpsFe3GFCHVDe9VKvhdUEf6WqVvYam0wtyPOIXJQ3AT97wO8a2YSFC"
@@ -15,14 +12,14 @@ const headers = new Headers({
   export function fetchBreeds(){
     return fetch('https://api.thecatapi.com/v1/breeds',requestOptions)
     .then(response => response.json())
-    .catch((error) => console.log(error))
+    .catch((error) => alert(error))
   }
 
   export function fetchCatByBreed(breedId){
     return fetch(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`,requestOptions)
     .then(response => response.json())
     .then(res => res[0])
-    .catch((error) => console.log(error))
+    .catch((error) => alert(error))
   }
 
   

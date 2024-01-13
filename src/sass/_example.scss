@@ -11,7 +11,7 @@ body{
 }
 
 .loader {
-    display: none;
+    display: block;
 
     width: 48px;
     height: 48px;
@@ -31,6 +31,22 @@ body{
     }
     } 
 
-.visible{
-    display: inline-block;
+.is-hiden{
+    display: none;
+}
+
+// 
+
+.cat-info{
+    margin-top: 30px;
+}
+
+.overlay{
+    padding: 15px;
+    border: 1px #605c5c solid;
+    box-shadow: 5px 5px 5px #9e9c9c;
+
+    display: flex; 
+    justify-content: space-between;
+    gap: 40px;
 }
